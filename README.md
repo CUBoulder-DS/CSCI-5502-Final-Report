@@ -2,6 +2,14 @@
 
 The final project for CSCI 5502: Data Mining
 
+[Source Code README:](https://github.com/CUBoulder-DS/CSCI-5502-Final-Report/blob/main/src/README.md)
+
+- How to structure the code you're writing
+
+[Data README](https://github.com/CUBoulder-DS/CSCI-5502-Final-Report/blob/main/data/README.md)
+
+- How to download, setup, use the data (input datasets and output from our own code)
+
 ## How to generally do work for the CSCI Quarto project
 
 1.  Install Quarto and `install.packages("rmarkdown")` if you haven't already.
@@ -14,7 +22,7 @@ The final project for CSCI 5502: Data Mining
 
 ## Directory Structure
 
--   **data/**: This is where the data goes, that is outputted by our code or that we download (that is small enough to fit under the Github limits).
--   **CSCI_5502_Final_Report.pdf**: The actual final report paper. Auto-generated whenever `quarto render` is run in the `quarto-paper` directory.
--   **quarto-paper/**: Where the Quarto code for the Data Mining report should go.
--   **src/**: This is where all code files relating to analysis, data exploration etc go; they DO NOT go in the `quarto-paper` folder in order to keep that clean.
+- **data/**: This is where the data goes, that is outputted by our code or that we download (that is small enough to fit under the Github limits).
+- **CSCI_5502_Final_Report.pdf**: The actual final report paper. Auto-generated whenever `quarto render` is run in the `quarto-paper` directory.
+- **quarto-paper/**: Where the Quarto code for the Data Mining report should go.
+- **src/**: This is where all code files relating to analysis, data exploration etc go; they DO NOT go in the `quarto-paper` folder in order to keep that clean.
