@@ -14,7 +14,6 @@ book:
     - methods.qmd
     - results.qmd
     - conclusions.qmd
-    - references.qmd
   downloads: [pdf]
   output-file: CSCI_5502_Final_Report # PDF filename
   # cover-image: cover.png # Do we need a cover?
@@ -24,6 +23,9 @@ book:
     pinned: true
 
 bibliography: references.bib
+# Force all refs in .bib file to appear in References
+nocite: |
+  @*
 
 format:
   # html:

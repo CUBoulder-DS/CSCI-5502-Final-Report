@@ -4,4 +4,4 @@ This is a book created from markdown and executable code.
 
 See @wang2020diagnostic for example of citation.
 
-Another citation is here (@NeurIPSWinner1), and another @NeurIPSWinner2.
+Another citation is here [@NeurIPSWinner13], and another (@NeurIPSWinner2).
