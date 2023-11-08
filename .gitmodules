@@ -1,9 +1,0 @@
-[submodule "src/model_code/NeurIPS-Education-Challenge-2020"]
-	path = src/model_code/NeurIPS-Education-Challenge-2020
-	url = https://github.com/haradai1262/NeurIPS-Education-Challenge-2020.git
-[submodule "src/model_code/TOP1-for-task-2-in-the-NeurIPS-2020-Education-Challenge"]
-	path = src/model_code/TOP1-for-task-2-in-the-NeurIPS-2020-Education-Challenge
-	url = https://github.com/shshen-closer/TOP1-for-task-2-in-the-NeurIPS-2020-Education-Challenge
-[submodule "src/model_code/NeurIPSEducation2020"]
-	path = src/model_code/NeurIPSEducation2020
-	url = https://github.com/arghosh/NeurIPSEducation2020
