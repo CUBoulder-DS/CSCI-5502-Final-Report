@@ -11,4 +11,6 @@ This is where all code files relating to analysis, data exploration etc go; they
 - **`model_code/CRAFT-pytorch`**: Model for extracting the text from the Eedi Dataset question images, used for generating data for the winner from Task 3. To run, (although you don't need to run it if the `data/Eedi_dataset/images_text-segmentation/` folder exists):
   1. `cd` into `model_code/CRAFT-pytorch`
   2. run `pip install -r requirements.txt`
-  3. run ``
+  3. Make sure Bhav's changes to the `CRAFT-pytorch` repo are there (to get code working with newer torch/torchvision packages)
+  4. run `python test.py --trained_model=craft_mlt_25k.pth --test_folder="../../../data/Eedi_dataset/images/"`
+  5. Copy results folder to `data/Eedi_dataset/images_text-segmentation/` folder (make new if needed)
