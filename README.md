@@ -2,7 +2,7 @@
 
 The final project for CSCI 5502: Data Mining
 
-[Source Code README:](https://github.com/CUBoulder-DS/CSCI-5502-Final-Report/blob/main/src/README.md)
+[Source Code README](https://github.com/CUBoulder-DS/CSCI-5502-Final-Report/blob/main/src/README.md)
 
 - How to structure the code you're writing
 
