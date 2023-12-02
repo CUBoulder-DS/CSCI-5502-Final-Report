@@ -2,21 +2,20 @@
 
 ## Data
 
-TODO: 
+TODO:
 
-* Head of table
-* What's in the data, where did we get it
-* 
-
+-   Head of table
+-   What's in the data, where did we get it
+-   
 
 ## Analysis
 
 TODO:
 
-* Compare results of clustering to the given question category labels
-* Do PCA, do regression on both the PCs and original features, compare regression performance
-* Do regression
-  * Where label/output is the student's total score
-  * Regress on student info, predict total student score across all answers
-    * Also if it's predictive of score in the question category
-* Random forest?
+-   Compare results of clustering to the given question category labels
+-   Do PCA, do regression on both the PCs and original features, compare regression performance
+-   Do regression
+    -   Where label/output is the student's total score
+    -   Regress on student info, predict total student score across all answers
+        -   Also if it's predictive of score in the question category
+-   Random forest?
