@@ -8,7 +8,7 @@ TODO:
 -   What's in the data, where did we get it
 -   
 
-## Analysis
+## Statistical Methods Analysis
 
 TODO:
 

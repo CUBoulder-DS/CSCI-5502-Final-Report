@@ -1,7 +1,15 @@
 # Introduction
 
-This is a book created from markdown and executable code.
+## Background
 
-See @wang2020diagnostic for example of citation.
+<!-- TODO: Remove this. Just for example -->
+Example citations are [@NeurIPSWinner13], and another (@NeurIPSWinner2).
 
-Another citation is here [@NeurIPSWinner13], and another (@NeurIPSWinner2).
+## Research Questions
+<!-- Note: Rubric for Research Questions asks for: poses and answers most questions and includes many other interesting facts. -->
+
+
+
+### Objective
+
+### Rationale
