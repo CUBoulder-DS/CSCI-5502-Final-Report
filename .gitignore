@@ -5,3 +5,4 @@
 data/Eedi_dataset/metadata/answer_metadata_task_1_2.csv
 data/Eedi_dataset/train_data/train_task_1_2.csv
 *.ipynb_checkpoints
+data/Output/gower_dists.npy
