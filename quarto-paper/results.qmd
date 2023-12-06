@@ -3,3 +3,12 @@
 placeholder
 
 Final citation just to populate the refs @wang2021results
+
+Clustering Rand score: 0.663110886278148 	 adjusted rand score: 0.2913337558766249
+
+Clusters_K
+2.0    73301
+0.0    41230
+1.0    23742
+
+regression acc: 0.5703137995125585
