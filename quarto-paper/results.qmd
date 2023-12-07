@@ -1,14 +1,111 @@
 # Results
 
-placeholder
+```{python}
+#| include: false
 
-Final citation just to populate the refs @wang2021results
+%matplotlib inline
 
-Clustering Rand score: 0.663110886278148 	 adjusted rand score: 0.2913337558766249
+import os
+import pickle
 
-Clusters_K
-2.0    73301
-0.0    41230
-1.0    23742
+import pandas as pd
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+import sklearn
+from sklearn import metrics
+from IPython.display import display, Latex, Markdown
 
-regression acc: 0.5703137995125585
+import plotly.express as px
+import plotly.io as pio
+# Settings for plot rendering, makes work with HTML output + jupyer lab + static output
+# pio.renderers.default = "notebook+plotly_mimetype+png"
+pio.renderers.default = "png"
+
+data_dir = os.path.normpath("../data/")
+output_dir = os.path.join(data_dir, "Output")
+
+pd.set_option("display.precision", 4)
+```
+
+## Clustering
+
+See @fig-rand
+
+```{python}
+#| label: fig-rand
+#| fig-cap: Matrices of the rand index as compared across all clustering methods, and compared to the original source category labels. The scipy and sklearn clustering methods were done using a precomputed Gower matrix.
+#| fig-subcap:
+#|  - Rand Index Matrix
+#|  - Adjusted Rand Index
+#| layout-ncol: 2
+
+df_cluster = pd.read_csv(os.path.join(output_dir, "cluster_results_smaller.csv"), index_col=0)
+df_cluster["Category1"] = df_cluster["Category1"].astype("category").cat.codes
+
+def rand_score_from_ind(i1, i2, adj=False):
+    if adj:
+        return metrics.adjusted_rand_score(df_cluster.iloc[:, 10+i1], df_cluster.iloc[:, 10+i2])
+    else:
+        return metrics.rand_score(df_cluster.iloc[:, 10+i1], df_cluster.iloc[:, 10+i2])
+
+colnames = [
+    "Kprototypes",
+    "Scipy",
+    "Sklearn, single linkage",
+    "Sklearn, average linkage",
+    "Sklearn, complete linkage",
+    "Source category labels"
+    ]
+
+rands = [[rand_score_from_ind(i1, i2) for i2 in range(6)] for i1 in range(6)]
+df_rands = pd.DataFrame(rands, index=colnames, columns=colnames)
+fig = px.imshow(df_rands, text_auto=True)
+# fig.update_layout(height=600)
+fig.show()
+
+adj_rands = [[rand_score_from_ind(i1, i2, adj=True) for i2 in range(6)] for i1 in range(6)]
+df_adj_rands = pd.DataFrame(adj_rands, index=colnames, columns=colnames)
+fig = px.imshow(df_adj_rands, text_auto=True)
+# fig.update_layout(height=600)
+fig.show()
+```
+
+## Supervised Learning Models Performance
+
+See @tbl-perfs
+
+```{python}
+#| label: tbl-perfs
+#| tbl-cap: The performance values and some settings for the supervized learning models ran, sorted by accuracy.
+
+df_perfs = pd.read_csv(os.path.join(output_dir, "model_perf.csv"), index_col=0)
+df_perfs = df_perfs.sort_values("Accuracy", ascending=False)
+
+df_perfs
+```
+
+### Performance Plots
+
+See @fig-perf-plots
+
+```{python}
+#| label: fig-perf-plots
+#| fig-cap: The ROC, confusion matrix, and precision-recall curves for the best and worst performing model.
+#| layout-ncol: 3
+#| layout-nrow: 2
+#| fig-subcap:
+#|  - "Perceptron: ROC Curve"
+#|  - "Perceptron: confusion matrix"
+#|  - "Perceptron: precison-recall curve"
+#|  - "HistGradientBoostingClassifier: ROC Curve"
+#|  - "HistGradientBoostingClassifier: confusion matrix"
+#|  - "HistGradientBoostingClassifier: precison-recall curve"
+
+with open(os.path.join(output_dir, "model_plots.pkl"), 'rb') as f:
+    plots = pickle.load(f)
+
+for m in ["Perceptron", "HistGradientBoostingClassifier"]:
+    for k in ["Roc", "Confusion", "PR"]:
+        plots[m][k].plot()
+```

@@ -39,19 +39,24 @@ format:
     toc: true
     link-citations: true
     csl: apa.csl
-    # header-includes: # dont need?
-    #   - \usepackage{float}
-    #   - \floatplacement{table}{H}
-    #   - \floatplacement{image}{H}
+    header-includes: # dont need?
+      - \usepackage{float}
+      - \floatplacement{table}{H}
+      - \floatplacement{image}{H}
     geometry:
       - margin=0.5in
+    # keep-tex: true
+    fig-pos: "H"
 
 ## Extra settings
 
 # Don't include code in the report
 execute:
   echo: false
+  warning: false
+  error: false
   freeze: auto
 
 latex-clean: true # delete latex files after rendering
 latex-auto-mk: true
+latex-auto-install: true
