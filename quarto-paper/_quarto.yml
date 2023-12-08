@@ -3,7 +3,7 @@ project:
   output-dir: "../"
 
 book:
-  title: "An Analysis of Machine Learning on Educational Data"
+  title: "An Analysis of Educational Diagnostic Questions"
   author:
     - "Bhavana Jonnalagadda"
     - "Erik Whitfield"
