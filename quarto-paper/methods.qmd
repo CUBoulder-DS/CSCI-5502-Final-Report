@@ -34,6 +34,7 @@ The data used format can be seen in @tbl-src-data. The description of the column
 - **GroupId**: The class (group of students) in which the student was assigned the question.
 - **QuizId**: The assigned quiz which contains the question the student answered.
 
+### Exploratory Analysis
 
 ```{python}
 #| label: tbl-src-data
@@ -53,11 +54,11 @@ display(Markdown(df_data.head().loc[:, "QuizId":].to_markdown()))
 
 ### Clustering
 
+#### Performance metrics
+
 ### Supervised Learning Models
 
-### Principal Component Analysis (PCA)
-
-#### Using PCA with Supervised Learning
+#### Performance metrics
 
 TODO:
 

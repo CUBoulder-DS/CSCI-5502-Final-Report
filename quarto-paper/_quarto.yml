@@ -33,6 +33,10 @@ format:
   #   smooth-scroll: true
   #   number-sections: true
   #   citations-hover: true
+  #   grid:
+  #     body-width: 1000px
+  #     sidebar-width: 150px
+
   pdf:
     documentclass: scrreprt
     number-depth: 4
@@ -43,9 +47,11 @@ format:
       - \usepackage{float}
       - \floatplacement{table}{H}
       - \floatplacement{image}{H}
+    hyperrefoptions:
+      - linktoc=all
+    latex-output-dir: "../"
     geometry:
       - margin=0.5in
-    # keep-tex: true
     fig-pos: "H"
 
 ## Extra settings

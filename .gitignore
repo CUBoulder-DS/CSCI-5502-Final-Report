@@ -7,4 +7,3 @@ data/Eedi_dataset/train_data/train_task_1_2.csv
 *.ipynb_checkpoints
 data/Output/gower_dists.npy
 data/eedi_34_data.csv
-data/Output/model_plots.pkl

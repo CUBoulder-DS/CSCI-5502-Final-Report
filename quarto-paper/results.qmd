@@ -28,9 +28,14 @@ output_dir = os.path.join(data_dir, "Output")
 pd.set_option("display.precision", 4)
 ```
 
+### Exploratory Data Analysis
+
+
 ## Clustering
 
 See @fig-rand
+
+### Perfomance
 
 ```{python}
 #| label: fig-rand
@@ -74,6 +79,8 @@ fig.show()
 ## Supervised Learning Models Performance
 
 See @tbl-perfs
+
+### Performance
 
 ```{python}
 #| label: tbl-perfs
