@@ -37,9 +37,6 @@ The data used format can be seen in @tbl-src-data. We dropped unused columns (`C
 ```{python}
 #| label: tbl-src-data
 #| tbl-cap: The source data used in this paper, tranformed by unions across several csvs, some columns dropped, and some created columns.
-#| tbl-subcap:
-#|  - First set of columns
-#|  - Second set of columns
 
 df_data = pd.read_csv(os.path.join(data_dir, "eedi_34_data.csv"), index_col=0)
 df_data = df_data.drop(columns=["CorrectAnswer", "AnswerValue", "SchemeOfWorkId"])

@@ -92,9 +92,11 @@ fig.show()
 
 ## Clustering
 
-See @fig-rand
+Clustering was performed as described in Section 2 (Methods); the `kmodes` library was used on teh base dataset, the Gower distances matrix was computed in order to handle categorical variables, and the distance matrix was used with `scikit-learn` library for Agglomerative clustering. In addition, for the Agglomerative clustering, 3 different linkages between ditances were used: single, average, and complete.
 
 ### Perfomance
+
+In order to judge the clustering output, the Rand index was calculated as described in the previous section. We compute the Rand index, and the adjusted Rand index, not only between the source labels and the computed clusters but also between each clustering method. The rand index results are displayed in @fig-rand, as a heat map matrix between all clustering types and the source labels.
 
 ```{python}
 #| label: fig-rand
@@ -136,13 +138,19 @@ fig.show()
 ```
 
 
-
-
 ## Supervised Learning Models Performance
 
-See @tbl-perfs
+The supervised learning models were run as described in the previous section, with their default values used for most parameters (such as loss function). For most models, the one modified parameter was the number of iterations run in order to train the model, by increasing it to 1000.
+
+For the best performing model (`HistGradientBoostingClassifier`), we made the following modifications in an attempt to improve its performance even further:
+
+-
+
+
 
 ### Performance
+
+See @tbl-perfs
 
 ```{python}
 #| label: tbl-perfs
