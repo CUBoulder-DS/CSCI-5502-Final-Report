@@ -13,13 +13,14 @@ book:
     - methods.qmd
     - results.qmd
     - conclusions.qmd
-  downloads: [pdf]
+  # downloads: [pdf]
   output-file: CSCI_5502_Final_Report # PDF filename
   # cover-image: cover.png # Do we need a cover?
   repo-url: "https://github.com/CUBoulder-DS/CSCI-5502-Final-Report"
   page-navigation: true
   navbar:
     pinned: true
+  date: today
 
 bibliography: references.bib
 # Force all refs in .bib file to appear in References
@@ -36,7 +37,7 @@ format:
     grid:
       body-width: 1000px
       sidebar-width: 150px
-    resources: "../CSCI_5502_Final_Report.pdf"
+    # resources: "../CSCI_5502_Final_Report.pdf"
   pdf:
     documentclass: scrreprt
     number-depth: 4

@@ -7,6 +7,7 @@
 
 import os
 import pickle
+import ast
 
 import pandas as pd
 import numpy as np
@@ -24,12 +25,70 @@ pio.renderers.default = "png"
 
 data_dir = os.path.normpath("../data/")
 output_dir = os.path.join(data_dir, "Output")
-
-pd.set_option("display.precision", 4)
 ```
 
 ### Exploratory Data Analysis
 
+For all used columns in the dataset, we show their statistical summaries in @tbl-summary.
+
+```{python}
+#| label: tbl-summary
+#| tbl-cap: Summary values of all the used columns in the dataset.
+#| layout-nrow: 2
+
+df_data = pd.read_csv(os.path.join(data_dir, "eedi_34_data.csv"), index_col=0)
+df_data.SubjectId = df_data.SubjectId.apply(ast.literal_eval)
+df_data = df_data.drop(columns=["CorrectAnswer", "AnswerValue", "SchemeOfWorkId"])
+
+disp1 = df_data.describe(include='all')\
+                .loc[:, :"GroupId"]\
+                .style.format(na_rep="", precision=1)
+disp2 = df_data.describe(include='all')\
+                .loc[:, "QuizId":]\
+                .style.format(na_rep="", precision=1)
+
+display(disp1)
+display(disp2)
+```
+
+We show a plot of all the subject categories found in the question dataset [@fig-subject-pie], proportioned by their count appearance in the dataset. Note that for the later clustering/analysis, we only use the 1st level hierarcical categories, aka `Algebra, Geometry and Measure, Number`.
+
+```{python}
+#| label: fig-subject-pie
+#| fig-cap: A sunburst plot of all the hierarchical subject categories found in the question dataset, with ratios correct to their count/appearance.
+
+df_subject = pd.read_csv(os.path.join(data_dir, "Eedi_dataset", "metadata", "subject_metadata.csv"))
+subject_mapping = pd.Series(df_subject.Name.values,index=df_subject.SubjectId).to_dict()
+
+## Turn list of subjects into a count of each hierarchical combo, with the subjects replaced as columns
+# Get counts
+df_subject_counts = pd.DataFrame(df_data.SubjectId.value_counts()).reset_index()
+# Expand subjectId list into multiple columns
+df_subject_counts = pd.concat([df_subject_counts.drop(columns='SubjectId'),
+                                pd.DataFrame(df_subject_counts['SubjectId'].tolist(),
+                                    index=df_subject_counts.index)\
+                                        .add_prefix('Subject')],
+                            axis=1)
+# Replace id ints with the actual numbers
+df_subject_counts.iloc[:, 1:] = df_subject_counts.iloc[:, 1:].applymap(subject_mapping.get)
+df_subject_counts = df_subject_counts.replace({np.NaN: None})
+
+fig = px.sunburst(df_subject_counts, path=["Subject" + str(i) for i in range(4)], values='count')
+fig.update_layout(title="Count of Subject Matter in Questions", height=700)
+fig.show()
+```
+
+In @fig-hist-correct, we show the proportion of questions answered correctly by each student as a histogram.
+
+```{python}
+#| label: fig-hist-correct
+#| fig-cap: A histogram of the proportion of questions answered correctly by a student.
+
+fig = px.histogram(x=df_data.groupby("UserId")["IsCorrect"].mean())
+fig.update_layout(title="Correctness of Student Answers", xaxis_title="Ratio of questions right for a student")
+fig.show()
+
+```
 
 ## Clustering
 
@@ -76,6 +135,9 @@ fig = px.imshow(df_adj_rands, text_auto=True)
 fig.show()
 ```
 
+
+
+
 ## Supervised Learning Models Performance
 
 See @tbl-perfs
@@ -85,6 +147,8 @@ See @tbl-perfs
 ```{python}
 #| label: tbl-perfs
 #| tbl-cap: The performance values and some settings for the supervized learning models ran, sorted by accuracy.
+
+pd.set_option("display.precision", 4)
 
 df_perfs = pd.read_csv(os.path.join(output_dir, "model_perf.csv"), index_col=0)
 df_perfs = df_perfs.sort_values("Accuracy", ascending=False)
@@ -99,20 +163,20 @@ See @fig-perf-plots
 ```{python}
 #| label: fig-perf-plots
 #| fig-cap: The ROC, confusion matrix, and precision-recall curves for the best and worst performing model.
-#| layout-ncol: 3
-#| layout-nrow: 2
+#| layout-ncol: 2
+#| layout-nrow: 3
 #| fig-subcap:
 #|  - "Perceptron: ROC Curve"
-#|  - "Perceptron: confusion matrix"
-#|  - "Perceptron: precison-recall curve"
 #|  - "HistGradientBoostingClassifier: ROC Curve"
+#|  - "Perceptron: confusion matrix"
 #|  - "HistGradientBoostingClassifier: confusion matrix"
+#|  - "Perceptron: precison-recall curve"
 #|  - "HistGradientBoostingClassifier: precison-recall curve"
 
 with open(os.path.join(output_dir, "model_plots.pkl"), 'rb') as f:
     plots = pickle.load(f)
 
-for m in ["Perceptron", "HistGradientBoostingClassifier"]:
-    for k in ["Roc", "Confusion", "PR"]:
+for k in ["Roc", "Confusion", "PR"]:
+    for m in ["Perceptron", "HistGradientBoostingClassifier"]:
         plots[m][k].plot()
 ```
