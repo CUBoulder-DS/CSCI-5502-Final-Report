@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: "../"
+  output-dir: "../website/"
 
 book:
   title: "An Analysis of Educational Diagnostic Questions"
@@ -27,16 +27,16 @@ nocite: |
   @*
 
 format:
-  # html:
-  #   theme: flatly
-  #   page-layout: full
-  #   smooth-scroll: true
-  #   number-sections: true
-  #   citations-hover: true
-  #   grid:
-  #     body-width: 1000px
-  #     sidebar-width: 150px
-
+  html:
+    theme: flatly
+    page-layout: full
+    smooth-scroll: true
+    number-sections: true
+    citations-hover: true
+    grid:
+      body-width: 1000px
+      sidebar-width: 150px
+    resources: "../CSCI_5502_Final_Report.pdf"
   pdf:
     documentclass: scrreprt
     number-depth: 4
