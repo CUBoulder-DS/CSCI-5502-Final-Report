@@ -21,11 +21,12 @@ import plotly.express as px
 import plotly.io as pio
 # Settings for plot rendering, makes work with HTML output + jupyer lab + static output
 # pio.renderers.default = "notebook+plotly_mimetype+png"
-pio.renderers.default = "png"
+pio.renderers.default = "plotly_mimetype+notebook_connected+png"
 
 data_dir = os.path.normpath("../data/")
 output_dir = os.path.join(data_dir, "Output")
 ```
+
 
 ### Exploratory Data Analysis
 
@@ -51,11 +52,30 @@ display(disp1)
 display(disp2)
 ```
 
+Some features of note are:
+
+- On average, all question-answser pairs are answered correct about 50% of the time.
+- Students are on average 75% confident in their answers.
+- The average student age is 11 years old, with a couple outliers of student being 38.
+
+
+::: {.content-visible when-format="pdf"}
+```{python}
+#| include: false
+## NOTE: This cell is to get and suppress the weird Quarto message,
+#  "Unable to display mimetype text/html"
+fig = px.histogram(x=df_data.groupby("UserId")["IsCorrect"].mean())
+fig.show()
+```
+:::
+
+
 We show a plot of all the subject categories found in the question dataset [@fig-subject-pie], proportioned by their count appearance in the dataset. Note that for the later clustering/analysis, we only use the 1st level hierarcical categories, aka `Algebra, Geometry and Measure, Number`.
 
 ```{python}
 #| label: fig-subject-pie
 #| fig-cap: A sunburst plot of all the hierarchical subject categories found in the question dataset, with ratios correct to their count/appearance.
+
 
 df_subject = pd.read_csv(os.path.join(data_dir, "Eedi_dataset", "metadata", "subject_metadata.csv"))
 subject_mapping = pd.Series(df_subject.Name.values,index=df_subject.SubjectId).to_dict()
@@ -78,6 +98,8 @@ fig.update_layout(title="Count of Subject Matter in Questions", height=700)
 fig.show()
 ```
 
+We observe that the category `Number` has the most questions, with `Geometry and Measure` having the most 2nd level categories.
+
 In @fig-hist-correct, we show the proportion of questions answered correctly by each student as a histogram.
 
 ```{python}
@@ -90,13 +112,15 @@ fig.show()
 
 ```
 
+The proportions generally seem to follow a normal distribution, which is expected and confirms the proper spread of data.
+
 ## Clustering
 
-Clustering was performed as described in Section 2 (Methods); the `kmodes` library was used on teh base dataset, the Gower distances matrix was computed in order to handle categorical variables, and the distance matrix was used with `scikit-learn` library for Agglomerative clustering. In addition, for the Agglomerative clustering, 3 different linkages between ditances were used: single, average, and complete.
+Clustering was performed as described in Section 2 (Methods); the `kmodes` library was used on the base dataset, the Gower distances matrix was computed in order to handle categorical variables, and the distance matrix was used with `scikit-learn` library for Agglomerative clustering. In addition, for the Agglomerative clustering, 3 different linkages between distances were used: single, average, and complete.
 
 ### Perfomance
 
-In order to judge the clustering output, the Rand index was calculated as described in the previous section. We compute the Rand index, and the adjusted Rand index, not only between the source labels and the computed clusters but also between each clustering method. The rand index results are displayed in @fig-rand, as a heat map matrix between all clustering types and the source labels.
+In order to judge the clustering output, the Rand index was calculated as described in the previous section. We compute the Rand index, and the adjusted Rand index, not only between the source labels and the computed clusters but also between each clustering method. The rand index results are displayed in @fig-rand, as a heat map matrix between all clustering types and the source labels. The highest Rand index with the source category labels was the `Kprototypes` clustering algorithm, with a value of 0.66.
 
 ```{python}
 #| label: fig-rand
@@ -125,32 +149,28 @@ colnames = [
     ]
 
 rands = [[rand_score_from_ind(i1, i2) for i2 in range(6)] for i1 in range(6)]
-df_rands = pd.DataFrame(rands, index=colnames, columns=colnames)
-fig = px.imshow(df_rands, text_auto=True)
+fig = px.imshow(pd.DataFrame(rands, index=colnames, columns=colnames), text_auto=True)
 # fig.update_layout(height=600)
 fig.show()
 
 adj_rands = [[rand_score_from_ind(i1, i2, adj=True) for i2 in range(6)] for i1 in range(6)]
-df_adj_rands = pd.DataFrame(adj_rands, index=colnames, columns=colnames)
-fig = px.imshow(df_adj_rands, text_auto=True)
+fig = px.imshow(pd.DataFrame(adj_rands, index=colnames, columns=colnames), text_auto=True)
 # fig.update_layout(height=600)
 fig.show()
 ```
 
 
-## Supervised Learning Models Performance
+## Supervised Learning Models Performance Metrics
 
 The supervised learning models were run as described in the previous section, with their default values used for most parameters (such as loss function). For most models, the one modified parameter was the number of iterations run in order to train the model, by increasing it to 1000.
 
 For the best performing model (`HistGradientBoostingClassifier`), we made the following modifications in an attempt to improve its performance even further:
 
--
+- The data was not transformed from the original source columns, leaving the categories nad numbers unchanged (with the exception of `DateAnswered`, which was still converted to an int).
+- The maximum number of leaf nodes was increased to 80.
+- The category factors were given as categorical input.
 
-
-
-### Performance
-
-See @tbl-perfs
+This resulted in the new best performing model, `HistGradientBoostingClassifier2`. The summary and performance statistics for each model are summarized in @tbl-perfs, with the metrics as described in the previous section.
 
 ```{python}
 #| label: tbl-perfs
@@ -160,13 +180,14 @@ pd.set_option("display.precision", 4)
 
 df_perfs = pd.read_csv(os.path.join(output_dir, "model_perf.csv"), index_col=0)
 df_perfs = df_perfs.sort_values("Accuracy", ascending=False)
+df_perfs.at[7, "Model"] = df_perfs.loc[7]["Model"] + "2"
 
-df_perfs
+df_perfs.style.hide(axis="index").format(na_rep="", precision=5)
 ```
 
 ### Performance Plots
 
-See @fig-perf-plots
+We display the ROC curve, confusion matrix, and precision-recall curves for the worst (`Perceptron`) and best (`HistGradientBoostingClassifier2`) performing models in @fig-perf-plots. We observe that we only see "typical" ROC and PR curves for the best performing model.
 
 ```{python}
 #| label: fig-perf-plots
