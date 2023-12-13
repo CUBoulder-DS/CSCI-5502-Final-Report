@@ -20,9 +20,10 @@ One limitation of this study is that there was relatively little student demogra
 
 Future iterations of this kind of work might attempt to focus the predictive abilities of the machine learning models to behavioral and social-emotional characteristics of students based on school-level data that is typically recorded. For example, attendance, chronic absences, discipline referrals, and expulsions are all kinds of information that are routinely collected by schools. This kind of information combined with standard metrics of academic performance might lead to incredibly useful insights that allow teachers and administrators to identify and design interventions for the most at-risk students.
 
-# Link to Video Presentation
+# Link to Video Presentation and Code
 
-The Youtube video of the presentation can be found at [TODO]()
+- The Youtube video of the presentation can be found at [TODO]()
+- The code for this paper can be found at [this Github repo](https://github.com/CUBoulder-DS/CSCI-5502-Final-Report)
 
 
 <!-- BJ Note: Leave this as is! -->
