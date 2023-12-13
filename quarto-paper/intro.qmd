@@ -1,15 +1,16 @@
 # Introduction
 
 ## Background
+In education, diagnostic testing plays a significant role in helping educators understand the needs and capabilities of students. It allows educators to tailor their teaching strategies to fit the unique circumstances of different learners, and it assists them in identifying areas in which students may need special interventions [@71c85ac5-c34a-3128-9880-7968eb69caa0]. Failure to draw attention to students' weaknesses as early and accurately as possible can have consequences that reach far beyond the context in which a diagnostic test is administered. Consequently, the questions of how to devise diagnostic testing items that are responsive to students' abilities and how to best interpret diagnostic data that has already been collected are not trivial.
 
-<!-- TODO: Remove this. Just for example -->
-Example citations are [@NeurIPSWinner13], and another (@NeurIPSWinner2).
+In the context of educational measurement and assessment, the validity of a test is dependent on the degree to which it actually measures what it claims to measure [@Borsboom_2004]. A test is only valid if it is sensitive to varying levels of some latent trait that causally produces the outcomes observed in test scores. If one can show that performance on a test is likely driven by variance in some attribute that is irrelevant to the construct that the test purports to measure, then the validity of the test is threatened. The importance of test validity in education reaches far beyond any particular testing instrument. In a broader sense, validity can be understood as referring to the extent to which evidence supports the interpretations and suggested uses of test scores [@Cronbach_1966].
+
+A necessary condition for the reasonable use of any test is a convincing body of evidence for the validity of a particular interpretation of test scores. In this regard, there are several ways that validity evidence can be weak or otherwise insufficient [@Borsboom_2004]. For instance, a test might fail to capture some relevant aspects of the construct it was designed to measure. A test might also be exceedingly susceptible to the influence of processes that are entirely unrelated to its intended purpose. For example, a reading comprehension test would be subject to accusations of construct-irrelevance if the content of the test elicited an emotional reaction that interfered with the test takers performance. There are numerous other threats to test validity, but what they have in common is that they call into question the claims and decisions that are made based on test results.
+The question of validity is especially relevant in diagnostic testing, the purpose of which is to inform decisions about the path that a student's instructional plan should follow. This is the topic with which the NeurIPS 2020 Education Challenge was concerned [@wang2021instructions]. In an effort to improve the technologies that are used to develop individualized learning resources for students, the competition tasked participants with devising new methods to understand students' response patterns and assess the quality of diagnostic questions. The challenge utilized data from an online education service provider called Eedi consisting of tens of thousands of multiple-choice questions that were administered over two years to a range of students from elementary to high-school grades. The test items were all targeted to different skills in mathematics, including Algebra, Geometry, and Statistics.
+The matter of validity is immediately relevant to the challenge. In order for the instructional decision making that results from the administration of diagnostic tests to be sound, the tests themselves must be valid. In order to be valid, the diagnostic test questions need to capture variation in respondents' mathematical abilities. The diagnostic items can be considered valid if there is evidence that they do in fact measure what the test administrators claim that they measure.
 
 ## Research Questions
-<!-- Note: Rubric for Research Questions asks for: poses and answers most questions and includes many other interesting facts. -->
+This analysis intends to test the validity of the test items used in the challenge and look for construct-irrelevant factors that may have influenced the responses to test items. We take up the following research questions:
 
-
-
-### Objective
-
-### Rationale
+- Do the item response data provide evidence to support the subject domains present in the test?
+- Can relatively accessible machine learning models predict student performance with enough precision to inform educational decision making?
