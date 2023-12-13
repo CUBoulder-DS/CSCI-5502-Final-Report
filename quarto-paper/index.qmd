@@ -1,5 +1,3 @@
 # Abstract {.unnumbered}
 
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+We investigate the validity of diagnostic test items used in the NeurIPS 2020 Education Challenge, which aimed to improve technologies for developing individualized learning resources. The focus is on understanding students' response patterns and assessing the quality of diagnostic questions. We address research questions related to the evidence supporting subject domains in the test items and the ability of machine learning models to predict student performance for informed educational decision-making. The analysis involves clustering methods, such as k-prototypes and Gower Distance, to assess the similarity of factors in the dataset. Additionally, several supervised learning models are applied to predict student performance, including logistic regression, support vector machines, and gradient boosting. The findings suggest that machine learning models could provide insights into students' learning and performance, contributing to the potential for precision educational interventions. However, limitations, such as limited demographic information, lack of student response times, and unknown student characteristics, highlight areas for improvement and future studies in the field.

@@ -4,6 +4,10 @@ High-quality machine learning models have been of keen interest in the field of 
 
 ## Findings
 
+From examining the results in @fig-rand, we can see that the clustering methods performed only adequately; if we choose to consider the adjusted Ran Index instead of the non-adjusted (as a reminder, the adjusted index accounts for the chance or random grouping of elements), we only get a maximum score of 0.29 similarity, indicating a low match in groupings with the source category labels.
+
+From @tbl-perfs, we can see that the best performing model achieved and accuracy and F1 score of 0.71. This is an adequate model, that gives statistically better results than random chance; however, compared to deep learning models implemented on this data which achieved performance of 0.94 and greater [@NeurIPSWinner13; @NeurIPSWinner2], our models do not measure up. Nevertheless, a simplistic supervised learning model achieving such performance is a good indicator of the predictive power of the features in the input dataset of diagnostic questions. Additionally, the ROC curves and precision-recall curve of the best performing model (@fig-perf-plots) show typical and moderately well-perfoming predictive performance.
+
 While the analysis conducted here did not produce any evidence to threaten the validity of the diagnostic test items in question and did not provide any reason to conclude that construct-irrelevant factors were driving student responses, we feel that there is reason to be optimistic about the relative success of the machine learning models. To the extent that the models were successful in generating information that could be used to guide educational decision making, they provide evidence in favor of using such models in other tasks such as machine grading, precision educational interventions, and automated tutoring. Machine grading is one area in which accurate and efficient models could ease the burden on educators by limiting the time they need to spend trying to provide meaningful and actionable feedback to students [@6b457a40-bf1a-3629-aa83-161d9245766c].
 
 With regard to precision educational interventions, the applications of effective machine learning models span a broad spectrum of contexts. For example, existing research points to potential uses for predicting dropouts and disciplinary problems, as well as other matters related to attrition and retention [@d93ae0e3-5e88-33f9-a1a9-4d31b151e5b8]. So, even though this analysis focused on an application for predicting response patterns to mathematics questions, there is no reason that the same models could not be used for prediction and diagnosis in other areas of education. This is especially relevant in the aftermath of the massive interruptions to students' education during and after the pandemic when educators across the country are racing to find ways to remedy the severe learning loss that took place.
@@ -16,6 +20,9 @@ One limitation of this study is that there was relatively little student demogra
 
 Future iterations of this kind of work might attempt to focus the predictive abilities of the machine learning models to behavioral and social-emotional characteristics of students based on school-level data that is typically recorded. For example, attendance, chronic absences, discipline referrals, and expulsions are all kinds of information that are routinely collected by schools. This kind of information combined with standard metrics of academic performance might lead to incredibly useful insights that allow teachers and administrators to identify and design interventions for the most at-risk students.
 
+# Link to Video Presentation
+
+The Youtube video of the presentation can be found at [TODO]()
 
 
 <!-- BJ Note: Leave this as is! -->
