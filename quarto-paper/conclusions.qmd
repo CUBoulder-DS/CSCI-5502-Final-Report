@@ -22,7 +22,7 @@ Future iterations of this kind of work might attempt to focus the predictive abi
 
 # Link to Video Presentation and Code
 
-- The Youtube video of the presentation can be found at [TODO]()
+- The video of the presentation can be found at [this Youtube link](https://www.youtube.com/watch?v=PPR_XuhXHT4)
 - The code for this paper can be found at [this Github repo](https://github.com/CUBoulder-DS/CSCI-5502-Final-Report)
 
 
